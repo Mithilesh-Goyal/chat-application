@@ -1,4 +1,25 @@
 class UsersController < ApplicationController
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to '/signin', notice: 'User created successfully!'
+    else
+      render :new
+    end
+  end
+
+  # def destroy
+  #   @user = User.find(params[:id])
+  #   @user.destroy
+  #   redirect_to "rooms/index"
+  # end
+
+
   def show
     @user = User.find(params[:id])
     @current_user = current_user
@@ -14,8 +35,12 @@ class UsersController < ApplicationController
   end
 
   private
+  
   def get_name(user1, user2)
     users = [user1, user2].sort
     "private_#{users[0].id}_#{users[1].id}"
+  end
+  def user_params
+    params.require(:user).permit(:username)
   end
 end

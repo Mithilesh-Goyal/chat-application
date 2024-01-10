@@ -16,13 +16,15 @@
         <%= render @rooms %>
       </div>
     </div>
+    <%= link_to 'Create New User', new_user_path %>
+    <br>
     <%= link_to 'Sign Out', signout_path,  :method => :delete %>
   </div>
 
   <div class="col bg-dark">
     <div class = "row">
       <div class="col bg-dark text-light">
-      <h4 class="text-center"> <%= @user&.username || @single_room.name %> </h4>
+      <h4 class="text-center"> <%= @user&.username || (@single_room&.name || "Room Name") %></h4>
       </div>
     </div>
 
